@@ -25,7 +25,7 @@ public class RelationshipsTest extends BaseLogin{
         String expectedText = name;
         String tableXPath = "//table[@class='o_list_table table table-sm table-hover table-striped o_list_table_ungrouped']";
 
-        boolean entryFound = commons.isEntryPresent(driver, tableXPath, expectedText);
+        boolean entryFound = commons.isEntryPresentInPaginatedTable(driver, tableXPath, expectedText);
         Assert.assertTrue(entryFound, "Expected entry with text '" + expectedText + "' not found");
         Thread.sleep(3000);
     }

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="All Test Suite" >
+<!--    parallel="classes" thread-count="1"-->
     <listeners>
         <listener class-name="listener.TestListeners" />
     </listeners>
     <test verbose="2" preserve-order="true" name="D:/Automation/Automation_Framework">
         <classes>
             <class name= "testcase.LoginPageTest"/>
-            <class name="testcase.RegistryGroupPageTest"/>
-            <class name="testcase.RegistryIndividualPageTest"/>
-            <class name="testcase.ProgramCreationTest"/>
-            <class name="testcase."></class>
+<!--            <class name="testcase.RegistryGroupPageTest"/>-->
+<!--            <class name="testcase.RegistryIndividualPageTest"/>-->
+<!--            <class name="testcase.ProgramCreationTest"/>-->
+<!--            <class name="testcase.ProgramFundCreationTest"/>-->
+<!--            <class name="testcase.RegistryIDTest"/>-->
+<!--            <class name="testcase.RegistrantTagTest"/>-->
+<!--            <class name="testcase.GenderTypeTest"/>-->
+<!--            <class name="testcase.RelationshipsTest"/>-->
+<!--            <class name="testcase.GroupTypeTest"/>-->
+<!--            <class name="testcase.GroupMembershipKindTest"/>-->
         </classes>
     </test>
 </suite>

@@ -22,7 +22,7 @@ public class GenderTypeTest extends BaseLogin {
         commons.click(driver,By.xpath(locators.getProperty("gender_type_save_button")));
         String expectedText = code;
         String tableXPath = "//table[@class='o_list_table table table-sm table-hover table-striped o_list_table_ungrouped']";
-        boolean entryFound = commons.isEntryPresent(driver, tableXPath, expectedText);
+        boolean entryFound = commons.isEntryPresentInPaginatedTable(driver, tableXPath, expectedText);
         Assert.assertTrue(entryFound, "Expected entry with text '" + expectedText + "' not found");
         Thread.sleep(2000);
     }

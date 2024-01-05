@@ -12,7 +12,7 @@ import java.io.IOException;
 public class RegistrantTagTest extends BaseLogin {
 
     @Test(dataProviderClass = ReadXLSData.class,dataProvider = "openg2pdata")
-    public static void registryTagCreation(String registrantTag) throws IOException, InterruptedException {
+    public static void registrantTagCreation(String registrantTag) throws IOException, InterruptedException {
         login();
         commons.click(driver, By.xpath(locators.getProperty("registry_configuration")));
         commons.click(driver,By.xpath(locators.getProperty("registrant_tags")));
@@ -21,7 +21,7 @@ public class RegistrantTagTest extends BaseLogin {
         commons.click(driver,By.xpath(locators.getProperty("save_registrant_tag")));
         String expectedText = registrantTag;
         String tableXPath = "//table[@class='o_list_table table table-sm table-hover table-striped o_list_table_ungrouped']";
-        boolean entryFound = commons.isEntryPresent(driver, tableXPath, expectedText);
+        boolean entryFound = commons.isEntryPresentInPaginatedTable(driver, tableXPath, expectedText);
         Assert.assertTrue(entryFound, "Expected entry with text '" + expectedText + "' not found");
         Thread.sleep(3000);
 
