@@ -1,0 +1,106 @@
+name: Test Workflow
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          java-package: 'jdk'
+          architecture: 'x64'
+          check-latest: false
+          server-id: 'github'
+          server-username: ${{ github.actor }}
+          server-password: ${{ github.token }}
+          overwrite-settings: true
+          job-status: 'success'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Set up WireGuard # Setting up the Wiregaurd to access the openg2p url's
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard
+          sudo cp scripts/openg2p-e2e.conf /etc/wireguard/
+          sudo systemctl start wg-quick@openg2p-e2e.service
+
+      - name: Chrome setup
+        uses: browser-actions/setup-chrome@v1
+      - run: chrome --version
+
+      - uses: actions/checkout@v2
+      - name: Chromedriver setup
+        uses: nanasess/setup-chromedriver@v2
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional   
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=true
+
+      - name: Run Sanity tests
+        run: mvn clean test
+
+      - name: Slack Notification on success
+        if: ${{ success() }}
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: '{"text": "*Workflow ran successfully.*\\nActor: ${{ github.actor }}\\nCommit ID: ${{ github.sha }}"}'
+        env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
+
+      - name: Install Allure
+        run: |
+          sudo apt-get install default-jre
+          wget https://github.com/allure-framework/allure2/releases/download/2.18.1/allure_2.18.1-1_all.deb
+          sudo dpkg -i allure_2.18.1-1_all.deb
+
+      - name: Generate Allure Report
+        run: |
+          allure generate --clean
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          publish_dir: allure-report
+
+      - name: Slack Notification on failure
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: '{"text": "*Workflow failed.*\nActor: ${{ github.actor }}\nCommit ID: ${{ github.sha }}\nFailed Step: ${{ github.event_name }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
+
+      - name: Slack Notification on success
+        if: ${{ success() }}
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: '{"text": "*Workflow ran successfully.*\nActor: ${{ github.actor }}\nCommit ID: ${{ github.sha }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK }}

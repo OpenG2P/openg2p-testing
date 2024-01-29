@@ -11,9 +11,6 @@ import org.openqa.selenium.TakesScreenshot;
 import utilities.TestLogger;
 
 import java.io.ByteArrayInputStream;
-import java.util.Arrays;
-
-import static base.DriverCreator.driver;
 
 public class TestListeners implements ITestListener {
 
