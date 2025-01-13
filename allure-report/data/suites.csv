@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jan 03 18:57:50 IST 2024","Wed Jan 03 18:57:52 IST 2024","1641","All Test Suite","D:/Automation/Automation_Framework","testcase.LoginPageTest","testcase.LoginPageTest","loginTest","loginTest",""
+"passed","Wed Jan 03 18:57:44 IST 2024","Wed Jan 03 18:57:47 IST 2024","3191","All Test Suite","D:/Automation/Automation_Framework","testcase.LoginPageTest","testcase.LoginPageTest","loginTest","loginTest",""
+"passed","Wed Jan 03 18:57:38 IST 2024","Wed Jan 03 18:57:41 IST 2024","3011","All Test Suite","D:/Automation/Automation_Framework","testcase.LoginPageTest","testcase.LoginPageTest","resetPassword","resetPassword",""
+"passed","Wed Jan 03 18:57:31 IST 2024","Wed Jan 03 18:57:35 IST 2024","3563","All Test Suite","D:/Automation/Automation_Framework","testcase.LoginPageTest","testcase.LoginPageTest","resetPassword","resetPassword",""

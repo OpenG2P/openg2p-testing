@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ReadPropertyFile {
     public static void main(String[] args) throws IOException {
-        FileReader fileReader = new FileReader(System.getProperty("user.dir")+"\\testconfig\\configfile\\config.properties");
+        FileReader fileReader = new FileReader("testconfig/configfile/config.properties");
         Properties properties = new Properties();
         properties.load(fileReader);
     }

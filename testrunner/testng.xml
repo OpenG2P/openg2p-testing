@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="UI Automation" >
     <listeners>
         <listener class-name="listener.TestListeners" />
     </listeners>
-    <test verbose="2" preserve-order="true" name="D:/Automation/Automation_Framework">
+    <test name="Login" parallel="classes" thread-count="1">
         <classes>
-            <class name= "testcase.LoginPageTest"/>
-            <class name="testcase.RegistryGroupPageTest"/>
-            <class name="testcase.RegistryIndividualPageTest"/>
-            <class name="testcase.ProgramCreationTest"/>
-            <class name="testcase."></class>
+            <class name="testcase.LoginPageTest"/>
         </classes>
     </test>
+    <test name="Config" parallel="classes" thread-count="6">
+        <classes>
+            <class name="testcase.RegistryIDTest"/>
+            <class name="testcase.RegistrantTagTest"/>
+            <class name="testcase.RelationshipsTest"/>
+            <class name="testcase.GroupTypeTest"/>
+            <class name="testcase.GenderTypeTest"/>
+            <class name="testcase.GroupMembershipKindTest"/>
+        </classes>
+    </test>
+<!--    <test name="Registry" parallel="classes" thread-count="2">-->
+<!--        <classes>-->
+<!--            <class name="testcase.RegistryIndividualPageTest"/>-->
+<!--            <class name="testcase.RegistryGroupPageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Registry" parallel="classes" thread-count="2">-->
+<!--        <classes>-->
+<!--            <class name="testcase.MTSConnectorTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    -->
+<!--    <test name="Program" parallel="classes" thread-count="1">-->
+<!--        <classes>-->
+<!--            <class name="testcase.ProgramCreationTest"/>-->
+<!--            <class name="testcase.ProgramFundCreationTest"/>-->
+<!--            <class name="testcase.EligibilityManagerTest"/>-->
+<!--            <class name="testcase.DeduplicationManagerTest"/>-->
+<!--            <class name="testcase.CashPaymentManagerTest"/>-->
+<!--            <class name="testcase.VoucherConfigFileTest"/>-->
+<!--            <class name="testcase.VoucherPaymentManagerTest"/>-->
+<!--            <class name="testcase.G2PConnectPaymentManagerTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Flow"-->
 </suite>
+
+
+
+
+
+
+
+
+
